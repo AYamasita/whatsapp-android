@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -125,6 +126,17 @@ public class LoginActivity extends Activity {
 
         boolean boolRespEnviandoSMS =   enviaSMS("+" + strTelefoneSemFormatacao,strMensagemSMS );
         Log.i("Envio de SMS", String.valueOf(boolRespEnviandoSMS));
+
+        if(boolRespEnviandoSMS == true)
+        {
+            Intent intent = new Intent(LoginActivity.this, ValidadorActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else
+        {
+            Toast.makeText(LoginActivity.this, "Problema ao enviar o SMS.", Toast.LENGTH_LONG).show();
+        }
 
        /*Recuperando os valores no arquivo SharedPreferences*/
         HashMap<String,String> usuario = preferencias.getDadosUsuario();
